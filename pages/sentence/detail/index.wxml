@@ -1,0 +1,42 @@
+<!--pages/sentence/detail/index.wxml-->
+<view class="panel">
+	<view class="top-section">
+		<!--button list-->
+		<button class="top-collect" bindtap="updateCollect">
+			<view class="collect-img" wx:if="{{!collect_status}}">
+				<image src="../../../images/icon/like.png" />
+			</view>
+			<view class="collect-img" wx:if="{{collect_status}}">
+				<image src="../../../images/icon/liked.png" />
+			</view>
+		</button>
+		<button class="top-copy top-btn" bindtap="copy">
+			<image src='../../../images/icon/copy.png' />
+		</button>
+	</view>
+	<view class="sentence-section" wx-if="{{sentence}}">
+		<view class="sentence-title">
+			<text class="content" decode='true' user-select='true' wx:if="{{sentence.title_arr}}"
+                wx:for="{{sentence.title_arr}}" wx:key="index">{{item}}</text>
+		</view>
+		<view class="sentence-origin">
+			<text class="author" decode='true' user-select='true'>{{author.author_name}}</text>
+		</view>
+	</view>
+	<view class="weui-loadmore" wx-if="{{is_loading}}">
+		<view class="weui-loading" />
+		<view class="weui-loadmore__tips"> 正在加载</view>
+	</view>
+	<!--诗词内容-->
+	<view class="page__bd page__content" wx:if="{{poem}}">
+		<official-account/>
+		<navigator url="/pages/poem/detail/index?id={{poem.id}}" hover-class="navigator-hover" class="weui-cell poem-item">
+			<view class="poem-title author">{{poem.title}}</view>
+			<view class="poem-author">{{'['+poem.dynasty+'] '+poem.author}}</view>
+			<view class="poem-title content">{{poem.content}}</view>
+		</navigator>
+	</view>
+	<!-- 快捷导航 -->
+	<shortcut id="" />
+</view>
+
